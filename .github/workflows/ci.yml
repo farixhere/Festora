@@ -3,8 +3,6 @@ on:
   push:
     branches: [main]
   pull_request:
-permissions:
-  contents: write
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -17,23 +15,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Run checks
-        run: |
-          mkdir -p /tmp/report
-          (npm install --no-audit --no-fund > /tmp/report/1-install.log 2>&1; echo "exit=$?" >> /tmp/report/1-install.log)
-          (npm run typecheck > /tmp/report/2-typecheck.log 2>&1; echo "exit=$?" >> /tmp/report/2-typecheck.log)
-          (npm test > /tmp/report/3-test.log 2>&1; echo "exit=$?" >> /tmp/report/3-test.log)
-          (npm run build > /tmp/report/4-build.log 2>&1; echo "exit=$?" >> /tmp/report/4-build.log)
-          tail -n 5 /tmp/report/*.log
-      - name: Publish report to ci-report branch
-        if: always() && github.event_name == 'push'
-        run: |
-          cd /tmp/report
-          git init -q -b ci-report
-          git config user.name ci && git config user.email ci@example.com
-          echo "${{ github.sha }}" > sha.txt
-          git add -A && git commit -q -m "report for ${{ github.sha }}"
-          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-report
-      - name: Fail if any step failed
-        run: |
-          ! grep -l "exit=[1-9]" /tmp/report/*.log
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
