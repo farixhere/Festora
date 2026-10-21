@@ -1,0 +1,55 @@
+name: Smoke
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: pw
+          POSTGRES_DB: festora
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres:pw@localhost:5432/festora
+      BETTER_AUTH_SECRET: ci-only-secret-ci-only-secret-ci-only
+      BETTER_AUTH_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run db:migrate
+      - run: npm run build
+      - name: Exercise the app
+        continue-on-error: true
+        run: |
+          mkdir -p /tmp/report
+          (npm run start > /tmp/report/server.log 2>&1 &)
+          for i in $(seq 1 30); do curl -sf localhost:3000/api/health >/dev/null && break; sleep 1; done
+          {
+            echo "## health"; curl -si localhost:3000/api/health
+            echo; echo "## sign-up"
+            curl -si -X POST localhost:3000/api/auth/sign-up/email -H 'content-type: application/json' -H 'origin: http://localhost:3000' \
+              -d '{"name":"Smoke Test","email":"smoke@example.com","password":"correct-horse-battery"}' -c /tmp/jar
+            echo; echo "## session"; curl -si localhost:3000/api/auth/get-session -b /tmp/jar
+            echo; echo "## pages"
+            for p in / /events /sign-in /sign-up /sitemap.xml /robots.txt /dashboard /onboarding; do
+              echo "$p -> $(curl -s -o /dev/null -w '%{http_code}' -b /tmp/jar localhost:3000$p)"
+            done
+          } > /tmp/report/exercise.log 2>&1
+      - name: Publish report
+        if: always()
+        run: |
+          cd /tmp/report && git init -q -b ci-report
+          git config user.name ci && git config user.email ci@example.com
+          echo "${{ github.sha }}" > sha.txt
+          git add -A && git commit -q -m "smoke ${{ github.sha }}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" ci-report

@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: base, changeFrequency: "weekly", priority: 1 },
     { url: `${base}/events`, changeFrequency: "daily", priority: 0.9 },
   ];
-  if (!isDatabaseConfigured) return entries;
+  if (!isDatabaseConfigured()) return entries;
   try {
     const slugs = await listPublishedSlugs();
     for (const s of slugs) {
