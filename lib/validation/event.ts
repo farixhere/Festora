@@ -42,10 +42,10 @@ const baseSchema = z.object({
     .max(200, "Summary must be 200 characters or fewer"),
   description: z.string().trim().max(10000, "Description is too long"),
   category: z.enum(EVENT_CATEGORIES, {
-    errorMap: () => ({ message: "Choose a category" }),
+    message: "Choose a category",
   }),
   mode: z.enum(["in_person", "online", "hybrid"], {
-    errorMap: () => ({ message: "Choose how the event is held" }),
+    message: "Choose how the event is held",
   }),
   venue: z.string().trim().max(200, "Venue is too long"),
   city: z.string().trim().max(120, "City is too long"),
@@ -57,7 +57,7 @@ const baseSchema = z.object({
   registrationClosesAt: z.string(),
   capacity: z.string().trim(),
   visibility: z.enum(["public", "unlisted"], {
-    errorMap: () => ({ message: "Choose a visibility" }),
+    message: "Choose a visibility",
   }),
   coverImage: z.string().trim().max(500),
   organizerName: z

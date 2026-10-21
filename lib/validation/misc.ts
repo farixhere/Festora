@@ -35,7 +35,7 @@ export const organizationSchema = z.object({
 });
 
 export const memberRoleSchema = z.enum(["admin", "organizer", "viewer"], {
-  errorMap: () => ({ message: "Choose a role" }),
+  message: "Choose a role",
 });
 
 export const addMemberSchema = z.object({
