@@ -112,9 +112,10 @@ export async function updateRegistrationStatusAction(
         .from(registrations)
         .where(eq(registrations.id, registrationId))
         .for("update");
-      if (!reg) return { error: "Registration not found." } as const;
+      if (!reg) return { ok: false, error: "Registration not found." } as const;
       if (!canTransition(reg.status, next)) {
         return {
+          ok: false,
           error: `A ${reg.status} registration can't be changed to ${next}.`,
         } as const;
       }
@@ -127,9 +128,9 @@ export async function updateRegistrationStatusAction(
           updatedAt: new Date(),
         })
         .where(eq(registrations.id, registrationId));
-      return { name: reg.fullName } as const;
+      return { ok: true, name: reg.fullName } as const;
     });
-    if ("error" in outcome) return fail(outcome.error);
+    if (!outcome.ok) return fail(outcome.error);
 
     await logActivity({
       organizationId: access.event.organizationId,
