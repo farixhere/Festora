@@ -24,6 +24,12 @@ type AuthError = { message?: string; code?: string; status?: number } | null | u
 function friendly(error: AuthError, fallback: string): string {
   if (!error) return fallback;
   if (error.status === 429) return "Too many attempts. Please wait a minute and try again.";
+  if (error.status && error.status >= 500) {
+    return "The server couldn't complete that. Check /api/health — the database or auth secret may not be configured.";
+  }
+  if (error.status === 403) {
+    return "This address isn't an allowed origin. Set BETTER_AUTH_URL to this site's URL and redeploy.";
+  }
   return error.message || fallback;
 }
 

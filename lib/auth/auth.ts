@@ -34,6 +34,9 @@ export const auth = betterAuth({
   }),
   // Preview deployments get their own *.vercel.app origin.
   trustedOrigins: [
+    ...(process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? [`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`]
+      : []),
     ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
     ...(process.env.VERCEL_BRANCH_URL
       ? [`https://${process.env.VERCEL_BRANCH_URL}`]
