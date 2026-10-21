@@ -1,0 +1,62 @@
+## health
+HTTP/1.1 200 OK
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+content-type: application/json
+Date: Wed, 21 Oct 2026 06:43:19 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"ok":true,"database":"up","config":{"DATABASE_URL":true,"BETTER_AUTH_SECRET":true,"BETTER_AUTH_URL":true}}
+## sign-up
+HTTP/1.1 200 OK
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+content-type: application/json
+set-cookie: __Secure-better-auth.session_token=RErQCpwek7NK8GSeBAnqaYs41ZwxnGKd.Dj7LMzHl6yUBAbvrLxmEc%2BIt1E%2FuYUpZmsv4gEp4pnk%3D; Max-Age=604800; Path=/; HttpOnly; Secure; SameSite=Lax
+set-cookie: __Secure-better-auth.session_data=eyJzZXNzaW9uIjp7InNlc3Npb24iOnsiZXhwaXJlc0F0IjoiMjAyNi0xMC0yOFQwNjo0MzoyMC4wNTJaIiwidG9rZW4iOiJSRXJRQ3B3ZWs3Tks4R1NlQkFucWFZczQxWnd4bkdLZCIsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMjFUMDY6NDM6MjAuMDUyWiIsInVwZGF0ZWRBdCI6IjIwMjYtMTAtMjFUMDY6NDM6MjAuMDUyWiIsImlwQWRkcmVzcyI6IjAwMDA6MDAwMDowMDAwOjAwMDA6MDAwMDowMDAwOjAwMDA6MDAwMCIsInVzZXJBZ2VudCI6ImN1cmwvOC41LjAiLCJ1c2VySWQiOiJCSHZPUm5PSEtmRFNZb1V0NTFoY3JOQ3pCN3Q5SE9lNiIsImlkIjoiTFkzYmdtWG52aHV2TDhZVXQxS3pHNWVXcHBPak5OWmgifSwidXNlciI6eyJuYW1lIjoiU21va2UgVGVzdCIsImVtYWlsIjoic21va2VAZXhhbXBsZS5jb20iLCJlbWFpbFZlcmlmaWVkIjpmYWxzZSwiaW1hZ2UiOm51bGwsImNyZWF0ZWRBdCI6IjIwMjYtMTAtMjFUMDY6NDM6MjAuMDQ1WiIsInVwZGF0ZWRBdCI6IjIwMjYtMTAtMjFUMDY6NDM6MjAuMDQ1WiIsImlkIjoiQkh2T1JuT0hLZkRTWW9VdDUxaGNyTkN6Qjd0OUhPZTYifSwidXBkYXRlZEF0IjoxNzkyNTY1MDAwMDU2LCJ2ZXJzaW9uIjoiMSJ9LCJleHBpcmVzQXQiOjE3OTI1NjUzMDAwNTYsInNpZ25hdHVyZSI6ImdVMnhXalppVktQcGlaY3o3MTdTMkhOcFJqRUFYMVVxd3RCbjl2SE5zQ2sifQ; Max-Age=300; Path=/; HttpOnly; Secure; SameSite=Lax
+Date: Wed, 21 Oct 2026 06:43:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"token":"RErQCpwek7NK8GSeBAnqaYs41ZwxnGKd","user":{"name":"Smoke Test","email":"smoke@example.com","emailVerified":false,"image":null,"createdAt":"2026-10-21T06:43:20.045Z","updatedAt":"2026-10-21T06:43:20.045Z","id":"BHvORnOHKfDSYoUt51hcrNCzB7t9HOe6"}}
+## session
+HTTP/1.1 200 OK
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+cache-control: no-store
+content-type: application/json
+pragma: no-cache
+Date: Wed, 21 Oct 2026 06:43:20 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"session":{"id":"LY3bgmXnvhuvL8YUt1KzG5eWppOjNNZh","createdAt":"2026-10-21T06:43:20.052Z","updatedAt":"2026-10-21T06:43:20.052Z","userId":"BHvORnOHKfDSYoUt51hcrNCzB7t9HOe6","expiresAt":"2026-10-28T06:43:20.052Z","token":"RErQCpwek7NK8GSeBAnqaYs41ZwxnGKd","ipAddress":"0000:0000:0000:0000:0000:0000:0000:0000","userAgent":"curl/8.5.0"},"user":{"id":"BHvORnOHKfDSYoUt51hcrNCzB7t9HOe6","createdAt":"2026-10-21T06:43:20.045Z","updatedAt":"2026-10-21T06:43:20.045Z","email":"smoke@example.com","emailVerified":false,"name":"Smoke Test","image":null}}
+## pages
+/ -> 200
+/events -> 200
+/sign-in -> 307
+/sign-up -> 307
+/sitemap.xml -> 200
+/robots.txt -> 200
+/dashboard -> 307
+/onboarding -> 200
